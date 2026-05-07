@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+
+	<title>EEG signal processing &#8211; Pattern Recognition &amp; Machine Learning Lab</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Pattern Recognition &amp; Machine Learning Lab &raquo; Feed" href="https://pkai.pknu.ac.kr/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Pattern Recognition &amp; Machine Learning Lab &raquo; Comments Feed" href="https://pkai.pknu.ac.kr/index.php/comments/feed/" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/pkai.pknu.ac.kr\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9.13"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://pkai.pknu.ac.kr/wp-includes/css/dist/block-library/style.min.css?ver=5.9.13' type='text/css' media='all' />
+<style id='wp-block-library-theme-inline-css' type='text/css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code>code{font-family:Menlo,Consolas,monaco,monospace;color:#1e1e1e;padding:.8em 1em;border:1px solid #ddd;border-radius:4px}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-group:where(.has-background){padding:1.25em 2.375em}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto;opacity:.4}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='x-blog-plus-google-font-css'  href='https://fonts.googleapis.com/css?family=Roboto+Slab%3A400%2C700%7CLato%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='slicknav-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/css/slicknav.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='xblog-google-font-css'  href='https://fonts.googleapis.com/css?family=PT+Serif%3A400%2C400i%2C700%2C700i%7CCrete+Round%3A400%2C400i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='xblog-style-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog-plus/style.css?ver=5.9.13' type='text/css' media='all' />
+<link rel='stylesheet' id='x-blog-plus-parent-style-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/style.css?ver=5.9.13' type='text/css' media='all' />
+<link rel='stylesheet' id='x-blog-plus-main-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog-plus/assets/css/main.css?ver=1.0.5' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/css/font-awesome.css?ver=4.7.0%20' type='text/css' media='all' />
+<link rel='stylesheet' id='block-style-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/css/block.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='xblog-responsive-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/css/responsive.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='x-blog-custom-style-css'  href='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/css/custom_script.css?ver=5.9.13' type='text/css' media='all' />
+<style id='x-blog-custom-style-inline-css' type='text/css'>
+.site-title a,
+			.site-description {
+				color: #000000 ;
+			}
+</style>
+<link rel='stylesheet' id='gbox-effects-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/css/effects.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='venobox-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/css/venobox.min.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='gbox-colabthi-webfont-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/fonts/colabthi-webfont.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/css/slick/slick.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-theme-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/css/slick/slick-theme.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='gallery-box-main-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/css/gallerybox-style.css?ver=1.6.6' type='text/css' media='all' />
+<link rel='stylesheet' id='animate-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/css/animate.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap.min-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/css/bootstrap.min.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome.min-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/css/font-awesome.min.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='mp-style-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/css/mp-style.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='rocket-font-css'  href='//cdn.jsdelivr.net/font-notosans-kr/1.0.0-v1004/NotoSansKR-2350.css?ver=5.9.13' type='text/css' media='all' />
+<link rel='stylesheet' id='rocket-font-css-css'  href='https://pkai.pknu.ac.kr/wp-content/plugins/rocket-font/assets/css/pkai-pknu-ac-kr_rocketfont.min.css?ver=1688984376' type='text/css' media='all' />
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/themes/x-blog-plus/assets/js/xmain.js?ver=5.9.13' id='x-blog-plus-main-js-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/js/modernizr.js?ver=5.9.13' id='modernizr-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://pkai.pknu.ac.kr/index.php/wp-json/" /><link rel="alternate" type="application/json" href="https://pkai.pknu.ac.kr/index.php/wp-json/wp/v2/posts/83" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://pkai.pknu.ac.kr/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://pkai.pknu.ac.kr/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9.13" />
+<link rel="canonical" href="https://pkai.pknu.ac.kr/index.php/2020/01/21/eeg-signal-processing/" />
+<link rel='shortlink' href='https://pkai.pknu.ac.kr/?p=83' />
+<link rel="alternate" type="application/json+oembed" href="https://pkai.pknu.ac.kr/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpkai.pknu.ac.kr%2Findex.php%2F2020%2F01%2F21%2Feeg-signal-processing%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://pkai.pknu.ac.kr/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpkai.pknu.ac.kr%2Findex.php%2F2020%2F01%2F21%2Feeg-signal-processing%2F&#038;format=xml" />
+<link rel="icon" href="https://pkai.pknu.ac.kr/wp-content/uploads/cropped-cropped-Free_Sample_By_Wix-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://pkai.pknu.ac.kr/wp-content/uploads/cropped-cropped-Free_Sample_By_Wix-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://pkai.pknu.ac.kr/wp-content/uploads/cropped-cropped-Free_Sample_By_Wix-180x180.png" />
+<meta name="msapplication-TileImage" content="https://pkai.pknu.ac.kr/wp-content/uploads/cropped-cropped-Free_Sample_By_Wix-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			/* 모바일 전용: 대표 이미지는 풀폭, 본문은 가운데 + 살짝 여백, 사이드바는 아래로 표시 */
+@media (max-width: 767px) {
+  /* 1) 바깥 컨테이너: 정상 100% (잘림/왼쪽 붙음 방지) */
+  .baby-container.site-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+		
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box;
+  }
+
+  /* 2) 본문 컨테이너: 가운데 정렬 유지 */
+  #primary.content-area,
+  #main.site-main,
+  article.type-page,
+  article.type-page .entry-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+		padding-top: 5px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    float: none !important;
+    clear: both !important;
+    box-sizing: border-box;
+  }
+
+  /* 3) 대표 이미지/커버만 화면 끝까지(풀폭) */
+  article.type-page .entry-content > .wp-block-image:first-of-type,
+  article.type-page .entry-content > .wp-block-cover,
+  article.type-page .entry-content > .alignfull {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+  /* 풀폭 이미지 안정화 */
+  article.type-page .entry-content > .wp-block-image img,
+  article.type-page .entry-content > .wp-block-cover img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  /* 4) 나머지 일반 블록은 가독성 위한 좌우 여백(본문이 벽에 안 붙게) */
+  article.type-page .entry-content > *:not(.alignfull):not(.wp-block-cover):not(.wp-block-image:first-of-type) {
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 12px !important;   /* ← 더 꽉 차게: 8px/0으로 조절 */
+    padding-right: 12px !important;
+    box-sizing: border-box;
+  }
+
+  /* 5) 사이드바는 숨기지 않고 본문 아래로 이동 */
+  #secondary,
+  .sidebar,
+  .widget-area {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    clear: both !important;
+    margin: 16px 0 0 0 !important;   /* 본문 아래 간격 (원하면 0으로) */
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* 6) 가로 스크롤 방지 */
+  html, body { overflow-x: hidden; }
+}
+
+
+
+
+
+
+
+/* 모바일 전용: 상단 헤더 영역(로고/타이틀) 높이 축소 */
+@media (max-width: 767px) {
+  /* 바깥 래퍼 여백 축소 */
+  .no-header-img { 
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+
+  /* 헤더 컨테이너 자체 여백 축소 */
+  .baby-container.site-branding {
+    padding-left: 12px !important;   /* 필요시 0~16px로 조절 */
+    padding-right: 12px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  /* 사이트 제목/부제 크기·줄간격 축소 */
+  .site-branding .site-title,
+  .site-branding h1.site-title {
+    font-size: 28px !important;      /* 원하면 18~26px 사이로 조절 */
+    line-height: 1.1 !important;
+    margin: 0 !important;
+  }
+  .site-branding .site-description {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    margin: 4px 0 0 0 !important;
+  }
+	
+
+  /* 로고 이미지가 크면 제한 */
+  .site-branding img,
+  .custom-logo {
+    max-height: 40px !important;     /* 32~48px 선호; 필요시 조절 */
+    height: auto !important;
+    width: auto !important;
+  }
+
+  /* 불필요한 여백 제거(테마에 따라) */
+  .site-branding > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 제목-부제 사이 간격을 gap으로 지정 */
+  .site-branding { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    row-gap: 12px !important;   /* ← 원하는 간격(px)로 조절 */
+  }
+}
+
+
+
+
+
+
+/* 모바일 전용: 페이지 제목 영역(Entry Header) 축소 */
+@media (max-width: 767px) {
+  /* 상하 여백(높이) 줄이기 */
+  .entry-header {
+    padding-top: 0px !important;     /* 필요 시 6~14px로 조절 */
+    padding-bottom: 4px !important;
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;   /* 섹션 간 간격 */
+  }
+
+  /* 제목 글자 크기/줄간격/여백 축소 */
+  .entry-header .entry-title {
+    font-size: 25px !important;      /* ← 원하면 18~24px로 조절 */
+    line-height: 1.2 !important;
+    margin: 0 !important;            /* 위/아래 기본 마진 제거 */
+    font-weight: 500;                /* 필요 시 굵기 유지/변경 */
+  }
+}
+
+
+
+
+
+
+/* 모바일: 테이블 안 이미지가 찌그러지지 않게 (비율 유지) */
+@media (max-width: 767px) {
+  .entry-content table img,
+  .wp-block-table img {
+    height: auto !important;      /* ← inline height 무력화 */
+    width: auto !important;       /* 기본 비율 유지 */
+    max-width: 100% !important;   /* 셀 너비를 넘지 않게 */
+    display: block;
+    margin: 0 auto;               /* 가운데 정렬(원하면 제거) */
+    object-fit: contain;          /* 안전장치 */
+  }
+  /* 셀이 고정 높이면 함께 해제 */
+  .entry-content table td,
+  .entry-content table th {
+    height: auto !important;
+  }
+}
+/* 모바일: 테이블 안 이미지는 중앙·축소, 데스크톱: 왼쪽 정렬+텍스트 넓게 */
+
+
+
+
+/* 모바일(≤767px): 그대로 유지 */
+@media (max-width: 767px) {
+  .entry-content table img,
+  .wp-block-table img {
+    width: 60% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+  .entry-content .wp-block-table td img:first-of-type {
+    float: none !important;
+    width: 60% !important;
+    height: auto !important;
+    margin: 0 auto 8px !important;
+    display: block;
+  }
+}
+
+
+
+
+
+/* 모바일(≤767px) 전용: 표 2열(왼쪽 이미지 / 오른쪽 글) 정리 */
+@media (max-width: 767px) {
+  /* 표 기본 */
+  .entry-content .wp-block-table table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: auto !important;
+  }
+
+  /* 모든 셀: 패딩 제거 + 상단 정렬 */
+  .entry-content .wp-block-table td,
+  .entry-content .wp-block-table th {
+    padding: 0 !important;
+    vertical-align: top !important;
+  }
+
+  /* 왼쪽 셀(이미지): 완전 왼쪽 붙이기, 폭은 작게 */
+  .entry-content .wp-block-table td:first-child {
+    width: 35% !important;              /* 필요시 25~40%로 조절 */
+    padding: 0 !important;
+  }
+  .entry-content .wp-block-table td:first-child img {
+    display: block !important;
+    width: 100% !important;             /* 셀 내에서 가득 */
+    height: auto !important;            /* 비율 유지 */
+    margin: 0 !important;               /* 주변 여백 0 */
+    padding: 0 !important;
+  }
+
+  /* 오른쪽 셀(글): 남은 폭 전부 사용, 이미지와 간격만 살짝 */
+  .entry-content .wp-block-table td:nth-child(2) {
+    width: 65% !important;
+    padding-left: 8px !important;       /* 텍스트 시작 간격(0~12px로 조절) */
+  }
+  .entry-content .wp-block-table td:nth-child(2) > p:first-child {
+    margin-top: 0 !important;           /* 첫 문단 위여백 제거 */
+  }
+}
+
+/* 모바일(≤767px): '미디어 & 텍스트' 블록에서 이미지 칸을 더 넓게 */
+@media (max-width: 767px) {
+  /* 이미지: 가로 100% 사용 + 자동 높이 */
+  .entry-content .wp-block-media-text .wp-block-media-text__media img {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+
+  /* 두 칼럼 비율을 이미지 쪽으로 더 줌 (기존 23% → 40%) */
+  .entry-content .wp-block-media-text.alignwide {
+    grid-template-columns: 40% 60% !important; /* 필요 시 45/55, 50/50로 조절 */
+    column-gap: 10px !important;               /* 텍스트와 간격(0~12px로 조절) */
+  }
+
+  /* 혹시 테마가 모바일에서 자동으로 '세로로 쌓기' 하면, 가로 1줄 유지 */
+  .entry-content .wp-block-media-text.is-stacked-on-mobile {
+    grid-template-columns: 40% 60% !important;
+  }
+}
+
+
+
+/* 모바일(≤767px): page-id-45는 제외하고 적용 */
+@media (max-width: 767px) {
+
+  /* 그리드 → 플렉스 스택 + 중앙 정렬 */
+  body:not(.page-id-45) .entry-content .wp-block-media-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    row-gap: 14px !important;
+    margin: 0 auto !important;
+    padding: 0 12px !important;
+    box-sizing: border-box;
+  }
+
+  /* 이미지 래퍼/링크/이미지 */
+  body:not(.page-id-45) .entry-content .wp-block-media-text__media,
+  body:not(.page-id-45) .entry-content .wp-block-media-text__media a,
+  body:not(.page-id-45) .entry-content .wp-block-media-text__media img {
+    display: block !important;
+    margin: 0 auto !important;
+    width: 100% !important;          /* 필요 시 90/85% */
+    max-width: 560px !important;
+    height: auto !important;
+  }
+
+  /* 텍스트 박스 */
+  body:not(.page-id-45) .entry-content .wp-block-media-text__content {
+    align-self: stretch !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body:not(.page-id-45) .entry-content .wp-block-media-text__content p:first-child { margin-top: 0 !important; }
+  body:not(.page-id-45) .entry-content .wp-block-media-text__content p { margin: .4em 0 !important; }
+}
+
+
+
+
+
+
+
+		</style>
+		</head>
+
+<body class="post-template-default single single-post postid-83 single-format-standard  title-center">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><div id="page" class="site x-blog">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+	
+	<div class="top-bar">
+		<div class="baby-container">
+			<div class="top-time">
+				Welcome			</div>
+			<div class="topbar-menu">
+				<nav id="top-navigation" class="top-navigation">
+										
+					
+				</nav><!-- #site-navigation -->	
+			</div>
+		</div>
+	</div>
+	<header id="masthead" class="site-header baby-head-img">
+                <div class="no-header-img"> 
+        
+        		<div class="baby-container site-branding ">
+            				<h1 class="site-title"><a href="https://pkai.pknu.ac.kr/" rel="home">Pattern Recognition &amp; Machine Learning Lab</a></h1>
+							<p class="site-description">Division of Computer Engineering and Artificial Intelligence, Pukyong National University</p>
+					</div><!-- .site-branding -->
+		<div class="menu-bar">
+			<nav id="site-navigation" class="main-navigation">
+				<div class="menu-menu-container"><ul id="baby-menu" class="baby-container"><li id="menu-item-299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-299"><a href="https://pkai.pknu.ac.kr/">Lab Introduction</a></li>
+<li id="menu-item-300" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-300"><a href="https://pkai.pknu.ac.kr/index.php/lab-supervisor/">Lab Supervisor</a></li>
+<li id="menu-item-320" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-320"><a href="https://pkai.pknu.ac.kr/index.php/members/">Members</a>
+<ul class="sub-menu">
+	<li id="menu-item-804" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-804"><a href="https://pkai.pknu.ac.kr/index.php/members/">Members</a></li>
+	<li id="menu-item-740" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-740"><a href="https://pkai.pknu.ac.kr/index.php/alumni/">Alumni</a></li>
+</ul>
+</li>
+<li id="menu-item-902" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-902"><a href="https://pkai.pknu.ac.kr/index.php/publications-patents/">Publications &#038; Patents</a>
+<ul class="sub-menu">
+	<li id="menu-item-301" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-301"><a href="https://pkai.pknu.ac.kr/index.php/publications-patents/">Publications &#038; Patents</a></li>
+	<li id="menu-item-787" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-787"><a href="https://pkai.pknu.ac.kr/index.php/books/">Books</a></li>
+</ul>
+</li>
+<li id="menu-item-302" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-302"><a href="https://pkai.pknu.ac.kr/index.php/research-topics/">Research Topics</a></li>
+<li id="menu-item-802" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-802"><a target="_blank" rel="noopener" href="https://github.com/PKNU-PR-ML-Lab">GitHub</a></li>
+</ul></div>				
+				
+			</nav><!-- #site-navigation -->	
+					</div>
+
+		
+	</header><!-- #masthead -->
+
+	
+	<div id="content" class="baby-container site-content ">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+
+		
+<article id="post-83" class="post-83 post type-post status-publish format-standard has-post-thumbnail hentry category-research-topics tag-eeg tag-pattern-recognition tag-signal-processing">
+
+            <div class="baby-feature-image"> 
+            <img width="1461" height="866" src="https://pkai.pknu.ac.kr/wp-content/uploads/eeg.jpg" class="attachment-full size-full wp-post-image" alt="" srcset="https://pkai.pknu.ac.kr/wp-content/uploads/eeg.jpg 1461w, https://pkai.pknu.ac.kr/wp-content/uploads/eeg-300x178.jpg 300w, https://pkai.pknu.ac.kr/wp-content/uploads/eeg-1024x607.jpg 1024w, https://pkai.pknu.ac.kr/wp-content/uploads/eeg-768x455.jpg 768w" sizes="(max-width: 1461px) 100vw, 1461px" />        </div>
+        	<header class="entry-header">
+				<div class="top-cat post-meta">
+			<i class="fa fa-folder"></i>
+			<a href="https://pkai.pknu.ac.kr/index.php/category/research-topics/" rel="category tag">Research Topics</a>		</div>
+				<h2 class="entry-title">EEG signal processing</h2>		<div class="entry-meta post-meta">
+			<span class="posted-on"><i class="fa fa-clock-o"></i>- <a href="https://pkai.pknu.ac.kr/index.php/2020/01/21/eeg-signal-processing/" rel="bookmark">January 21, 2020</a></span><span class="byline"> <i class="fa fa-user-circle"></i>- <span class="author vcard"><a class="url fn n" href="https://pkai.pknu.ac.kr/index.php/author/pr_ml_lab/">Won-Du Chang</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>EEG signal is recordings from the human brain. This signal is not much known yet, but we do understand parts of it. We’re trying to find specific patterns from EEG signals, which are the possible signs of diseases. Our subtopics are as follows:</p>
+
+
+<ul><li>Automatic detection of artifacts from EEGs</li><li>Automatic detection of epilepsy-related patterns</li></ul>
+
+
+<p class="has-medium-font-size"><strong>Paper Lists</strong></p>
+
+
+<ul><li>Hodam Kim, Jihyeon Ha, Won-Du Chang, Wanjoo Park, Laehyun Kim, Chang-Hwan Im, &#8220;Detection of Craving for Gaming in Adolescents with Internet Gaming Disorder Using Multimodal Biosignals&#8221;, Sensors, 2018, 18(1), Jan 1, 2018 (IF: 2.677@2016, Top 10% in Instruments &amp; Instrumentation). </li><li>Han-Jeong Hwang, Han Choi, Jeong-Youn Kim, Won-Du Chang, Do-Won Kim, Kiwoong Kim, Sungho Jo, Chang-Hwan Im, Toward more intuitive brain–computer interfacing: classification of binary covert intentions using functional near-infrared spectroscopy  Journal of biomedical optics 21 (9), 091303-091303, 1 Sep, 2016.</li><li>Won-Du Chang, Hoseung Cha, Chany Lee, Hoon-Chul Kang, and Chang-Hwan Im, &#8220;Automatic identification of interictal epileptiform discharges in secondary generalized epilepsy,&#8221; Computational and Mathematical Methods in Medicine, Vol. 2016, Article ID 8701973, 9 Jun, 2016 (IF: 0.937@2016).  </li><li>Won-Du Chang,  Jeong-Hwan Lim, Chang-Hwan Im, An Unsupervised Eye Blink Artifact Detection Method for Real-time Electroencephalogram Processing,&#8221; Physiological Measurement, 37 (3), 401-417, 19 Feb. 2016.  (SCI/ IF: 2.058@2016)</li><li>Won-Du Chang, Ho-seung Cha, Kiwoong Kim, Chang-Hwan Im, &#8220;Detection of Eye Blink Artifacts from Single Prefrontal Channel Electroencephalogram,&#8221; Computer Methods and Programs in Biomedicine (0169-2607), 124, 19-30, 1 Feb. 2016.(SCI/IF:2.503@2016/Top 20% in Computer Science, Theory &amp; Methods)</li><li>Won-Du Chang, Chang-Hwan Im, &#8220;Enhanced Template Matching Using Dynamic Positional Warping for Identification of Specific Patterns in Electroencephalogram,&#8221; Journal of Applied Mathematics (SCI-E), vol. 2014, Article ID 528071, 7 pages, April 24, 2014. http://dx.doi.org/10.1155/2014/528071 (IF: 0.72 when it was published. This journal has been dropped from SCI-E at Sep.2014)</li></ul>
+
+
+<p></p>
+	</div><!-- .entry-content -->
+
+
+</article><!-- #post-83 -->
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://pkai.pknu.ac.kr/index.php/2020/01/21/the-similarity-between-two-time-series-signals/" rel="prev">The similarity between two-time series signals</a></div><div class="nav-next"><a href="https://pkai.pknu.ac.kr/index.php/2022/12/02/lab-introduction/" rel="next">Lab introduction</a></div></div>
+	</nav>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<aside id="secondary" class="widget-area">
+	<section id="block-4" class="widget widget_block">
+<div class="wp-container-1 wp-block-group"><div class="wp-block-group__inner-container">
+<h2>Short Intro.</h2>
+
+
+
+<p>prof. Won-Du Chang's Lab.</p>
+</div></div>
+</section><section id="block-15" class="widget widget_block">
+<div class="wp-container-4 wp-block-group"><div class="wp-block-group__inner-container">
+<h2>Articles</h2>
+
+
+
+<div class="wp-container-3 wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column" style="flex-basis:100%">
+<div class="wp-container-2 wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column" style="flex-basis:100%"><ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/11/underwater-sound-source-detection/">음향신호를 활용한 딥러닝 기반의 수중소음원 탐지</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/11/estimation-of-wave-height-using-radar-image-sequences/">Estimation of wave height using radar image sequences</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/11/eagelectroarthrography/">EAG(Electroarthrography)</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/10/denoise-of-camera-footage-from-inclement-weather/">악천후 기상의 카메라 촬영 영상 노이즈 제거</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/10/construction-of-generative-network-model-for-bio-signals-pattern-recognition/">Construction of Generative Network Model for Bio-signals Pattern Recognition</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/10/side_scan_sonar/">합성 모델을 이용한 사이드 스캔 소나 이미지 합성</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/10/air-writing/">Air Writing</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2023/07/07/cross-modal-perception/">Cross modal perception을 이용한 감정 분석</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2022/12/02/lab-introduction/">Lab introduction</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2020/01/21/eeg-signal-processing/">EEG signal processing</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2020/01/21/the-similarity-between-two-time-series-signals/">The similarity between two-time series signals</a></li>
+<li><a href="https://pkai.pknu.ac.kr/index.php/2020/01/21/eye-writing/">Eye Writing</a></li>
+</ul></div>
+</div>
+</div></div>
+</div>
+</div>
+</div></div>
+</div></div>
+</section><section id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://pkai.pknu.ac.kr/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">Search</label><div class="wp-block-search__inside-wrapper "  style="width: 288px"><input type="search" id="wp-block-search__input-1" class="wp-block-search__input " name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button  "  >Search</button></div></form></section></aside><!-- #secondary -->
+
+	</div><!-- #content -->
+        <div class="footer-widget-area"> 
+        <div class="baby-container widget-footer"> 
+                    </div>
+    </div>
+    	<footer id="colophon" class="site-footer footer-display">
+		<div class="baby-container site-info">
+				<a href="https://wordpress.org/">Proudly powered by WordPress</a>
+				<span class="sep"> | </span>
+				Theme: x-blog-plus by <a href="https://wpthemespace.com/product/x-blog">wpthemespace.com</a>		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<style>.wp-container-1 .alignleft { float: left; margin-right: 2em; }.wp-container-1 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-2 .alignleft { float: left; margin-right: 2em; }.wp-container-2 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-3 .alignleft { float: left; margin-right: 2em; }.wp-container-3 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-4 .alignleft { float: left; margin-right: 2em; }.wp-container-4 .alignright { float: right; margin-left: 2em; }</style>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/js/skip-link-focus-fix.js?ver=20151215' id='xblog-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/js/jquery.slicknav.js?ver=20151215' id='slicknav-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/themes/x-blog/assets/js/main.js?ver=20151215' id='xblog-main-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-includes/js/imagesloaded.min.js?ver=4.1.4' id='imagesloaded-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/js/isotope.pkgd.min.js?ver=2.5.1' id='isotope.pkgd-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/js/venobox.min.js?ver=2.5.1' id='venobox-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/plugins/gallery-box/assets/js/slick.min.js?ver=2.5.1' id='slick.min-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/js/bootstrap.min.js?ver=1.0' id='bootstrap.min-js'></script>
+<script type='text/javascript' src='https://pkai.pknu.ac.kr/wp-content/plugins/magical-posts-display/assets/js/main.js?ver=1.0' id='haslider-main-js'></script>
+
+</body>
+</html>
