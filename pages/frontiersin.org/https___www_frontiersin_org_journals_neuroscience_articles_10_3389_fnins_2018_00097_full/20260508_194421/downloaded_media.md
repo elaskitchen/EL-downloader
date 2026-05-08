@@ -1,0 +1,17 @@
+## Downloaded Media Files
+
+- [1091-independent-component-analysis-of-electroencephalographic-data.pdf](./media/1091-independent-component-analysis-of-electroencephalographic-data.pdf) (1417 KB)
+- [1343-extended-ica-removes-artifacts-from-electroencephalographic-recordings.pdf](./media/1343-extended-ica-removes-artifacts-from-electroencephalographic-recordings.pdf) (1735 KB)
+![webimage-731DCAD7-7D53-4C7A-ABED6B270359A65F.png](./media/webimage-731DCAD7-7D53-4C7A-ABED6B270359A65F.png)
+![favicon_16-tenantFavicon-Frontiers.png](./media/favicon_16-tenantFavicon-Frontiers.png)
+![favicon_32-tenantFavicon-Frontiers.png](./media/favicon_32-tenantFavicon-Frontiers.png)
+![fnins-12-00097-g0001.webp](./media/fnins-12-00097-g0001.webp)
+![fnins-12-00097-g0002.webp](./media/fnins-12-00097-g0002.webp)
+![fnins-12-00097-g0003.webp](./media/fnins-12-00097-g0003.webp)
+![fnins-12-00097-g0004.webp](./media/fnins-12-00097-g0004.webp)
+![fnins-12-00097-g0005.webp](./media/fnins-12-00097-g0005.webp)
+![fnins-12-00097-g0006.webp](./media/fnins-12-00097-g0006.webp)
+![fnins-12-00097-g0007.webp](./media/fnins-12-00097-g0007.webp)
+![fnins-12-00097-g0008.webp](./media/fnins-12-00097-g0008.webp)
+![fnins-12-00097-g0009.webp](./media/fnins-12-00097-g0009.webp)
+![fnins-12-00097-g0010.webp](./media/fnins-12-00097-g0010.webp)
