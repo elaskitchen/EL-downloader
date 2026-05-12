@@ -5,3 +5,4 @@
 - [https___www_youtube_com_watch_v_gxAayCFnTsA_list_PLXo8Tdaw0czMUXXjezMP98FlwpG4LAThj (20260508_100900)](pages/youtube.com/https___www_youtube_com_watch_v_gxAayCFnTsA_list_PLXo8Tdaw0czMUXXjezMP98FlwpG4LAThj/20260508_100900/index.md) — 5 media files
 - [https___paulbourke_net_dataformats_eeg_ (20260508_192243)](pages/paulbourke.net/https___paulbourke_net_dataformats_eeg_/20260508_192243/index.md) — 0 media files
 - [https___www_frontiersin_org_journals_neuroscience_articles_10_3389_fnins_2018_00097_full (20260508_194421)](pages/frontiersin.org/https___www_frontiersin_org_journals_neuroscience_articles_10_3389_fnins_2018_00097_full/20260508_194421/index.md) — 15 media files
+- [https___www_emergentmind_com_topics_common_spatial_patterns_csp (20260512_144606)](pages/emergentmind.com/https___www_emergentmind_com_topics_common_spatial_patterns_csp/20260512_144606/index.md) — 3 media files
